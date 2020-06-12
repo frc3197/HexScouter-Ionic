@@ -1,6 +1,7 @@
 {
-  "name": "HexScouter",
-  "integrations": {},
-  "type": "angular",
-  "id": "d57094ff"
+  "name": "HexScout",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
 }
