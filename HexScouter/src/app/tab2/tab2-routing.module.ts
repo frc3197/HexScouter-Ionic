@@ -11,11 +11,11 @@ const routes: Routes = [
     path: '',
     component: Tab2Page,
   },
-  { path: 'tab2', component: Tab2Page },
-  { path: 'tab2b', component: Tab2bPage },
-  { path: 'tab2c', component: Tab2cPage },
-  { path: 'tab2d', component: Tab2dPage },
-  { path: 'tab2e', component: Tab2ePage },
+  { path: '/tabs/tab2', component: Tab2Page },
+  { path: '/tabs/tab2b', component: Tab2bPage },
+  { path: '/tabs/tab2c', component: Tab2cPage },
+  { path: '/tabs/tab2d', component: Tab2dPage },
+  { path: '/tabs/tab2e', component: Tab2ePage },
 ];
 
 @NgModule({
