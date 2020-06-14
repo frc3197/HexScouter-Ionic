@@ -9,12 +9,19 @@
 <ion-content [fullscreen]="true">
   <ion-item>
     <ion-label position="floating">Team Name</ion-label>
-    <ion-input type="number"></ion-input>
+    <ion-input type="number" [(ngModel)]="teamName"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Match Number</ion-label>
-    <ion-input type="number"></ion-input>
+    <ion-input type="number" [(ngModel)]="matchNum"></ion-input>
   </ion-item>
+  <ion-button (click)="saveJSON()">
+    Submit Data on Page
+  </ion-button>
+  <!-- TODO: Only for debug: Remove eventually -->
+  <ion-button (click)="readJSON()">
+    Read File to Console
+  </ion-button>
 
   <div id="nav">
     <ion-button [routerLink]="['/tabs/tab2']" color="secondary" id="first">

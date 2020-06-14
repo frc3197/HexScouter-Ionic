@@ -7,5 +7,55 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Welcome to HexScouter 2021!
+      </ion-card-title>
+      <ion-card-subtitle>
+        The official 3197 Scouting App for the 2021 season
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-item>
+      Changelog (V0.1)
+    </ion-item>
+    <ul>
+      <li>Initial beta release!</li>
+      <li>Layout finished</li>
+      <li>Basic JSON functionality implemented</li>
+      <li>Save/Load of individual scouting entries implemented</li>
+    </ul>
+    <ion-item>
+      Tutorial
+    </ion-item>
+    <ol>
+      <li>
+        Set Name and Scouting Position
+        <ol type="a">
+          <li>Navigate to the Settings Tab</li>
+          <li>Input name and Scouting Position as well as which regional you are scouting at</li>
+          <li>Click Submit. A notification will appear if the data was saved correctly</li>
+        </ol>
+      </li>
+      <li>
+        Start filling out the Scouting Form under "New Form"
+      </li>
+      <li>
+        Forms lets you manage your finished forms
+        <ul>
+          <li>You can now scout offline!</li>
+          <li>Forms are saved to your device after you are finished</li>
+          <li>You can view these forms, edit them, and delete them</li>
+          <li>When you're back online, click the "Upload" button to save all your entries to the google sheet</li>
+          <li>Note: This will only work if you have set which regional you are scouting at</li>
+        </ul>
+      </li>
+      <li>
+        The "View" Tab lets you view the current google sheet.
+        <ul>
+          <li>This will only work if you have set which regional you are scouting at</li>
+        </ul>
+      </li>
+    </ol>
+  </ion-card>
 </ion-content>
