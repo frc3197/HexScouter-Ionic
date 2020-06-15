@@ -11,7 +11,7 @@ import { viewClassName } from '@angular/compiler';
 export class Tab4Page implements OnInit {
   scouterName: String = '';
   regional: String = '';
-  midwestBool: boolean = true;
+  position: String = '';
   constructor(public toastController: ToastController) { }
 
   ngOnInit() {
@@ -25,9 +25,14 @@ export class Tab4Page implements OnInit {
     this.loadSettings();
   }
 
-  radioGroupChange(event){
+  regionalChange(event){
     this.regional = event.detail.value;
     console.log(this.regional);
+  }
+
+  positionChange(event){
+    this.position = event.detail.value;
+    console.log(this.position);
   }
 
   async loadSettings(){
@@ -41,8 +46,7 @@ export class Tab4Page implements OnInit {
       var obj = JSON.parse(contents.data);
       this.regional = obj.regional;
       this.scouterName = obj.scouterName;
-      console.log(this.regional);
-      console.log(this.scouterName);
+      this.position = obj.position;
       console.log(obj);
     }catch(e){
       this.presentToast('Error loading Settings');
@@ -51,7 +55,11 @@ export class Tab4Page implements OnInit {
   }
 
   async saveSettings(){
-    var obj = {scouterName: this.scouterName, regional: this.regional};
+    var obj = {
+      scouterName: this.scouterName, 
+      regional: this.regional,
+      position: this.position
+    };
     try {
       const result = await Filesystem.writeFile({
         path: 'settings.json',

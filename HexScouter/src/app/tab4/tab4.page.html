@@ -11,10 +11,11 @@
     <ion-label position="floating">Name</ion-label>
     <ion-input [(ngModel)]="scouterName"></ion-input>
   </ion-item>
-  <ion-radio-group name="regional-selection" (ionChange)="radioGroupChange($event)" [(ngModel)]="regional">
+  <ion-radio-group name="regional-selection" (ionChange)="regionalChange($event)" [(ngModel)]='regional'>
     <ion-list-header>
       <ion-label>Regional</ion-label>
     </ion-list-header>
+
     <ion-item>
       <ion-label>Midwest</ion-label>
       <ion-radio slot="start" value='midwest'></ion-radio>
@@ -26,6 +27,37 @@
     <ion-item>
       <ion-label>Seven Rivers</ion-label>
       <ion-radio slot="start" value='seven'></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  <ion-radio-group name="position-selection" (ionChange)="positionChange($event)" [(ngModel)]='position'>
+    <ion-list-header>
+      <ion-label>Position</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Blue 1</ion-label>
+      <ion-radio slot="start" value='blue1'></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Blue 2</ion-label>
+      <ion-radio slot="start" value='blue2'></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Blue 3</ion-label>
+      <ion-radio slot="start" value='blue3'></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Red 1</ion-label>
+      <ion-radio slot="start" value='red1'></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Red 2</ion-label>
+      <ion-radio slot="start" value='red2'></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Red 3</ion-label>
+      <ion-radio slot="start" value='red3'></ion-radio>
     </ion-item>
   </ion-radio-group>
 </ion-content>
