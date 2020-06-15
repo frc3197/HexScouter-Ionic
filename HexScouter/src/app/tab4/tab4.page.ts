@@ -60,9 +60,7 @@ export class Tab4Page implements OnInit {
         encoding: FilesystemEncoding.UTF8
       })
       console.log('Settings Saved', result);
-      this.presentToast('Successfully saved settings');
     } catch(e){
-      this.presentToast('An Error Occured');
       console.error('Unable to save settings', e);
     }
   }
