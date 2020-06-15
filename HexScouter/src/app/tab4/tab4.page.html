@@ -7,5 +7,26 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-item>
+    <ion-label position="floating">Name</ion-label>
+    <ion-input [(ngModel)]="scouterName"></ion-input>
+  </ion-item>
+  <ion-radio-group name="regional-selection" (ionChange)="radioGroupChange($event)" [(ngModel)]="regional">
+    <ion-list-header>
+      <ion-label>Regional</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Midwest</ion-label>
+      <ion-radio slot="start" value='midwest'></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Wisconsin</ion-label>
+      <ion-radio slot="start" value='wisconsin'></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Seven Rivers</ion-label>
+      <ion-radio slot="start" value='seven'></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  <ion-button>Save Settings</ion-button>
 </ion-content>

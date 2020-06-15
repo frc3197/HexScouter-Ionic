@@ -47,7 +47,7 @@ export class Tab2Page {
         directory: FilesystemDirectory.Data,
         encoding: FilesystemEncoding.UTF8
       });
-      console.log(contents);
+      console.log(contents.toString());
     }catch(e){
       this.presentToast('Please Input Match Number');
       console.error('Match Number not Present', e);
@@ -57,8 +57,12 @@ export class Tab2Page {
   async presentToast(m: String){
     const toast = await this.toastController.create({
       message: m.toString(),
-      duration: 2000,
+      duration: 1000,
     });
     toast.present();
+  }
+
+  ionViewWillLeave(){
+    this.saveJSON();
   }
 }
