@@ -1,10 +1,138 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tab2c</ion-title>
+    <ion-title>Tele-Op</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Which ports did the robot score?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Bottom Port</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='bottomChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Outer Port</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='outerChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Inner Port</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='innerChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Didn't Score</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='failedChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Unable to Score</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='unableChecked'></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Where can they shoot from?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Trench</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='trenchSPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>In front of Power Port</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='frontPPSPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Initiation Line</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='initSPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Shield Generator</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='shieldSPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Can't Shoot</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='unableSPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Didn't Shoot</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='failedSPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Other..." [(ngModel)]='shootPositionOther'></ion-input>
+      <ion-checkbox slot="end" [(ngModel)]='otherSPChecked'></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label position="floating">Balls Attempted in Upper Port</ion-label>
+    <ion-input type="number" [(ngModel)]='ballsAttemptedUpper'></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Balls Scored in Upper Port</ion-label>
+    <ion-input type="number" [(ngModel)]='ballsScoredUpper'></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Balls Attempted in Bottom Port</ion-label>
+    <ion-input type="number" [(ngModel)]='ballsAttemptedBottom'></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Balls Scored in Bottom Port</ion-label>
+    <ion-input type="number" [(ngModel)]='ballsScoredBottom'></ion-input>
+  </ion-item>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Where can they intake power cells from?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Ground</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='groundIPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Loading Station</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='loadingIPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Neither</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='neitherIPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Other..." [(ngModel)]='intakePositionOther'></ion-input>
+      <ion-checkbox slot="end" [(ngModel)]='otherIPChecked'></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>How did they manipulate the control panel?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Rotation Control (Stage 2 Spin)</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='stage2CPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Position Control (Stage 3 Spin)</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='stage3CPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Didn't manipulate the control panel</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='neitherCPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Can't manipulate the control panel</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='failedCPChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>match didn't reach high enough stage</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='matchFailCPChecked'></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
   <div id="nav">
     <ion-button [routerLink]="['/tabs/tab2']" color="primary" id="first">
       1

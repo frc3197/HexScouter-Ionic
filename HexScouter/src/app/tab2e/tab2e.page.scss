@@ -7,6 +7,15 @@
 #nav ion-button {
     position: fixed;
     bottom: 1vh;
+    z-index: 9999;
+}
+
+#submitButton {
+    margin: auto;
+    width: 50vw;
+    height: 30vw;
+    padding-top: 1vh;
+    margin-left: 25vw
 }
 
 #first {
