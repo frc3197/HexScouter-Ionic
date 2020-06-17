@@ -70,8 +70,10 @@ export class Tab2Page {
         directory: FilesystemDirectory.Cache,
         encoding: FilesystemEncoding.UTF8
       });
-      console.log(contents);
       var obj = JSON.parse(contents.data);
+      console.log(obj);
+      this.teamName = obj.teamName;
+      this.matchNum = obj.matchNum;
     }catch(e){
       this.presentToast('Error loading Cached Data');
       console.error('Match Number not Present', e);
@@ -88,5 +90,9 @@ export class Tab2Page {
 
   ionViewWillLeave(){
     this.saveJSON();
+  }
+
+  ionViewDidEnter(){
+    this.loadJSON();
   }
 }
