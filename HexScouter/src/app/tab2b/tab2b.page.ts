@@ -8,10 +8,10 @@ import { Filesystem, FilesystemDirectory, FilesystemEncoding } from '@capacitor/
   styleUrls: ['./tab2b.page.scss'],
 })
 export class Tab2bPage implements OnInit {
-  ballsShot: number = null;
-  ballsScored: number = null;
-  passedLine: boolean = null;
-  portsChecked: String[] = [];
+  autoBallsShot: number = null;
+  autoBallsScored: number = null;
+  autoPassedLine: boolean = null;
+  autoPortsChecked: String[] = [];
   bottomChecked: boolean = null;
   outerChecked: boolean = null;
   innerChecked: boolean = null;
@@ -41,19 +41,19 @@ export class Tab2bPage implements OnInit {
       matchNum: old.matchNum,
       position: old.position,
       scouterName: old.scouterName,
-      ballsShot: this.ballsShot,
-      ballsScored: this.ballsScored,
-      passedLine: this.passedLine,
-      portsChecked: this.portsChecked
+      autoBallsShot: this.autoBallsShot,
+      autoBallsScored: this.autoBallsScored,
+      autoPassedLine: this.autoPassedLine,
+      autoPortsChecked: this.autoPortsChecked
     };
     console.log(obj);
-    if(this.ballsShot == null){
+    if(this.autoBallsShot == null){
       this.presentToast('Please input number of balls shot');
-    }else if(this.ballsScored == null){
+    }else if(this.autoBallsScored == null){
       this.presentToast('Please input number of balls scored');
-    }else if(this.passedLine == null){
+    }else if(this.autoPassedLine == null){
       this.presentToast('Please set if the bot has passed the initiation line');
-    }else if(this.portsChecked == []){
+    }else if(this.autoPortsChecked == []){
       this.presentToast('Please check which ports the bot scored in');
     }else{
       try {
@@ -72,17 +72,18 @@ export class Tab2bPage implements OnInit {
   }
 
   async assembleArray(){
+    this.autoPortsChecked = [];
     if(this.bottomChecked){
-      this.portsChecked.push("Bottom Port");
+      this.autoPortsChecked.push("Bottom Port");
     }
     if(this.outerChecked){
-      this.portsChecked.push("Outer Port");
+      this.autoPortsChecked.push("Outer Port");
     }
     if(this.innerChecked){
-      this.portsChecked.push("Inner Port");
+      this.autoPortsChecked.push("Inner Port");
     }
     if(this.failedChecked){
-      this.portsChecked.push("Didn't Score");
+      this.autoPortsChecked.push("Didn't Score");
     }
   }
 
@@ -95,9 +96,9 @@ export class Tab2bPage implements OnInit {
       });
       var obj = JSON.parse(contents.data);
       console.log(obj);
-      this.ballsShot = obj.ballsShot;
-      this.ballsScored = obj.ballsScored;
-      this.passedLine = obj.passedLine;
+      this.autoBallsShot = obj.autoBallsShot;
+      this.autoBallsScored = obj.autoBallsScored;
+      this.autoPassedLine = obj.autoPassedLine;
       this.parseArray(obj);
     }catch(e){
       this.presentToast('Error loading Cached Data-- entries may not exist');
@@ -106,7 +107,9 @@ export class Tab2bPage implements OnInit {
   }
 
   async parseArray(obj: any){
-    var portsChecked: String[] = obj.portsChecked;
+    console.log("parseArray obj");
+    console.log(obj);
+    var portsChecked: String[] = obj.autoPortsChecked;
     if(portsChecked.includes("Bottom Port")){
       this.bottomChecked = true;
     }

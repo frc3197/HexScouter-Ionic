@@ -7,15 +7,15 @@
 <ion-content>
   <ion-item>
     <ion-label position="floating">Number of Balls Shot</ion-label>
-    <ion-input type="number" [(ngModel)]='ballsShot'></ion-input>
+    <ion-input type="number" [(ngModel)]='autoBallsShot'></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Number of Balls Scored</ion-label>
-    <ion-input type="number" [(ngModel)]='ballsScored'></ion-input>
+    <ion-input type="number" [(ngModel)]='autoBallsScored'></ion-input>
   </ion-item>
   
-  <ion-radio-group name="init-line-select" (ionChange)="initLineChange($event)" [(ngModel)]='passedLine'>
+  <ion-radio-group name="init-line-select" (ionChange)="initLineChange($event)" [(ngModel)]='autoPassedLine'>
     <ion-list-header>
       <ion-label>Did the bot pass the initiation line?</ion-label>
     </ion-list-header>
