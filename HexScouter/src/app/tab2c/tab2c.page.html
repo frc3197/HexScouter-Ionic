@@ -11,23 +11,23 @@
     </ion-list-header>
     <ion-item>
       <ion-label>Bottom Port</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='bottomChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleBottomChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Outer Port</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='outerChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleOuterChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Inner Port</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='innerChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleInnerChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Didn't Score</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='failedChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleFailedChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Unable to Score</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='unableChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleUnableChecked'></ion-checkbox>
     </ion-item>
   </ion-list>
 
@@ -37,52 +37,52 @@
     </ion-list-header>
     <ion-item>
       <ion-label>Trench</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='trenchSPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleTrenchSPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>In front of Power Port</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='frontPPSPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleFrontPPSPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Initiation Line</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='initSPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleInitSPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Shield Generator</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='shieldSPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleShieldSPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Can't Shoot</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='unableSPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleUnableSPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Didn't Shoot</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='failedSPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleFailedSPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-input placeholder="Other..." [(ngModel)]='shootPositionOther'></ion-input>
-      <ion-checkbox slot="end" [(ngModel)]='otherSPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleOtherSPChecked'></ion-checkbox>
     </ion-item>
   </ion-list>
 
   <ion-item>
     <ion-label position="floating">Balls Attempted in Upper Port</ion-label>
-    <ion-input type="number" [(ngModel)]='ballsAttemptedUpper'></ion-input>
+    <ion-input type="number" [(ngModel)]='teleBallsAttemptedUpper'></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Balls Scored in Upper Port</ion-label>
-    <ion-input type="number" [(ngModel)]='ballsScoredUpper'></ion-input>
+    <ion-input type="number" [(ngModel)]='teleBallsScoredUpper'></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Balls Attempted in Bottom Port</ion-label>
-    <ion-input type="number" [(ngModel)]='ballsAttemptedBottom'></ion-input>
+    <ion-input type="number" [(ngModel)]='teleBallsAttemptedBottom'></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Balls Scored in Bottom Port</ion-label>
-    <ion-input type="number" [(ngModel)]='ballsScoredBottom'></ion-input>
+    <ion-input type="number" [(ngModel)]='teleBallsScoredBottom'></ion-input>
   </ion-item>
 
   <ion-list>
@@ -91,19 +91,19 @@
     </ion-list-header>
     <ion-item>
       <ion-label>Ground</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='groundIPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleGroundIPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Loading Station</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='loadingIPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleLoadingIPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Neither</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='neitherIPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleNeitherIPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-input placeholder="Other..." [(ngModel)]='intakePositionOther'></ion-input>
-      <ion-checkbox slot="end" [(ngModel)]='otherIPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleOtherIPChecked'></ion-checkbox>
     </ion-item>
   </ion-list>
 
@@ -113,23 +113,23 @@
     </ion-list-header>
     <ion-item>
       <ion-label>Rotation Control (Stage 2 Spin)</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='stage2CPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleStage2CPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Position Control (Stage 3 Spin)</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='stage3CPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleStage3CPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Didn't manipulate the control panel</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='neitherCPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleNeitherCPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Can't manipulate the control panel</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='failedCPChecked'></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]='teleFailedCPChecked'></ion-checkbox>
     </ion-item>
     <ion-item>
-      <ion-label>match didn't reach high enough stage</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]='matchFailCPChecked'></ion-checkbox>
+      <ion-label>Match didn't reach high enough stage</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='teleMatchFailCPChecked'></ion-checkbox>
     </ion-item>
   </ion-list>
 

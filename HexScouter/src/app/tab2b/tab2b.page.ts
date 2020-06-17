@@ -11,6 +11,7 @@ export class Tab2bPage implements OnInit {
   autoBallsShot: number = null;
   autoBallsScored: number = null;
   autoPassedLine: boolean = null;
+  
   autoPortsChecked: String[] = [];
   bottomChecked: boolean = null;
   outerChecked: boolean = null;
