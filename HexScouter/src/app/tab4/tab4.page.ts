@@ -39,7 +39,7 @@ export class Tab4Page implements OnInit {
     try{
       let contents = await Filesystem.readFile({
         path: 'settings/settings.json',
-        directory: FilesystemDirectory.Documents,
+        directory: FilesystemDirectory.Data,
         encoding: FilesystemEncoding.UTF8
       });
       console.log(contents);
@@ -64,7 +64,7 @@ export class Tab4Page implements OnInit {
       const result = await Filesystem.writeFile({
         path: 'settings/settings.json',
         data: JSON.stringify(obj),
-        directory: FilesystemDirectory.Documents,
+        directory: FilesystemDirectory.Data,
         encoding: FilesystemEncoding.UTF8
       })
       console.log('Settings Saved', result);

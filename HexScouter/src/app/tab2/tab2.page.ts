@@ -19,7 +19,7 @@ export class Tab2Page {
     try{
       let contents = await Filesystem.readFile({
         path: 'settings/settings.json',
-        directory: FilesystemDirectory.Documents,
+        directory: FilesystemDirectory.Data,
         encoding: FilesystemEncoding.UTF8
       });
       var settings = JSON.parse(contents.data);
