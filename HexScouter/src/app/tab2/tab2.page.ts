@@ -20,8 +20,8 @@ export class Tab2Page {
     var currentDateTime = new Date();
     try{
       let contents = await Filesystem.readFile({
-        path: 'settings.json',
-        directory: FilesystemDirectory.Data,
+        path: 'settings/settings.json',
+        directory: FilesystemDirectory.Documents,
         encoding: FilesystemEncoding.UTF8
       });
       var settings = JSON.parse(contents.data);

@@ -38,8 +38,8 @@ export class Tab4Page implements OnInit {
   async loadSettings(){
     try{
       let contents = await Filesystem.readFile({
-        path: 'settings.json',
-        directory: FilesystemDirectory.Data,
+        path: 'settings/settings.json',
+        directory: FilesystemDirectory.Documents,
         encoding: FilesystemEncoding.UTF8
       });
       console.log(contents);
@@ -62,9 +62,9 @@ export class Tab4Page implements OnInit {
     };
     try {
       const result = await Filesystem.writeFile({
-        path: 'settings.json',
+        path: 'settings/settings.json',
         data: JSON.stringify(obj),
-        directory: FilesystemDirectory.Data,
+        directory: FilesystemDirectory.Documents,
         encoding: FilesystemEncoding.UTF8
       })
       console.log('Settings Saved', result);
