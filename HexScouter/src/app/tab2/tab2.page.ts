@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
+import { Plugins, Filesystem, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
 import { ToastController } from '@ionic/angular';
-
-const { Filesystem } = Plugins;
 
 @Component({
   selector: 'app-tab2',
