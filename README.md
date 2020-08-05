@@ -7,7 +7,7 @@ If you would like to try out the app by yourself, you'll need to set up Ionic.
 2. Clone the repository-- master will have the stable release while google-sheets is the branch I'm working on. Think of it as normal v. canary.
 3. It's possible the ios and android assets have not been properly built yet. To fix that, navigate to the root directory of HexScouter (not HexScouterDead) and run
 
-    ionic cap copy
+     ionic cap copy
 
 This should copy all of the web assets to android and ios. This may take a while. From there, run
 
