@@ -50,29 +50,8 @@ export class Tab2cPage implements OnInit {
   }
 
   async saveJSON(){
-    var currentDateTime = new Date();
-    try{
-      let contents = await Filesystem.readFile({
-        path: 'cache.json',
-        directory: FilesystemDirectory.Data,
-        encoding: FilesystemEncoding.UTF8
-      });
-      var old = JSON.parse(contents.data);
-    }catch(e){
-      this.presentToast('Error loading settings');
-      console.error('Error loading Settings', e);
-    }
     this.assembleArray();
     var obj = {
-      dateTime: old.dateTime,
-      teamName: old.teamName,
-      matchNum: old.matchNum,
-      position: old.position,
-      scouterName: old.scouterName,
-      autoBallsShot: old.autoBallsShot,
-      autoBallsScored: old.autoBallsScored,
-      autoPassedLine: old.autoPassedLine,
-      autoPortsChecked: old.autoPortsChecked,
       telePortsChecked: this.telePortsChecked,
       teleShootPositions: this.teleShootPositions,
       teleBallsAttemptedUpper: this.teleBallsAttemptedUpper,
@@ -84,26 +63,19 @@ export class Tab2cPage implements OnInit {
     };
     console.log(obj);
 
-    if(obj.telePortsChecked == []){
-      this.presentToast('Please check which ports the bot scored in');
-    }else if(obj.teleShootPositions == []){
-      this.presentToast('Please check which position the bot shot from');
-    }else if(obj.teleBallsAttemptedUpper == null){
-      this.presentToast('Please input number of balls attempted in the upper port');
-    }else if(obj.teleBallsScoredUpper = null){
-      this.presentToast('Please input number of balls scored in the upper port');
-    }else if(obj.teleBallsAttemptedBottom == null){
-      this.presentToast('Please input number of balls attempted in the lower port');
-    }else if(obj.teleBallsScoredBottom == null){
-      this.presentToast('Please input number of balls scored in the lower port');
-    }else if(obj.teleIntakePositions = []){
-      this.presentToast('Please check which positions the bot took in balls from');
-    }else if(obj.teleCPMethods = []){
-      this.presentToast('Please check which methods the bot used for the Control Panel');
-    }else{
+    var pass = true;
+    for(let item of Object.values(obj)){
+      if(item == null){
+        this.presentToast('Not all items in previous page have been filled in');
+        pass = false;
+        break;
+      }
+    }
+
+    if(pass){
       try {
         const result = await Filesystem.writeFile({
-          path: 'cache.json',
+          path: 'tab2CCache.json',
           data: JSON.stringify(obj),
           directory: FilesystemDirectory.Cache,
           encoding: FilesystemEncoding.UTF8
@@ -192,7 +164,7 @@ export class Tab2cPage implements OnInit {
   async loadJSON(){
     try{
       let contents = await Filesystem.readFile({
-        path: 'cache.json',
+        path: 'tab2CCache.json',
         directory: FilesystemDirectory.Cache,
         encoding: FilesystemEncoding.UTF8
       });
@@ -205,7 +177,7 @@ export class Tab2cPage implements OnInit {
       this.parseArray(obj);
     }catch(e){
       this.presentToast('Error loading Cached Data-- entries may not exist');
-      console.error('Match Number not Present', e);
+      console.error('Error loading Cached Data', e);
     }
   }
 

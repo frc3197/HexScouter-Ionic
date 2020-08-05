@@ -5,22 +5,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-radio-group name="climb-select" (ionChange)="climbChange($event)" [(ngModel)]='climbed'>
-    <ion-list-header>
+  <ion-radio-group name="climb-select" (ionChange)="eventChange($event)" [(ngModel)]='climbed'>
+    <ion-list-header color="dark">
       <ion-label>Did they climb?</ion-label>
     </ion-list-header>
     <ion-item>
       <ion-label>Yes</ion-label>
-      <ion-radio slot="start" value=1></ion-radio>
+      <ion-radio slot="start" value=true></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>No</ion-label>
-      <ion-radio slot="start" value=0></ion-radio>
+      <ion-radio slot="start" value=false></ion-radio>
     </ion-item>
   </ion-radio-group>
 
-  <ion-radio-group name="rendez-point-select" (ionChange)="rendezChange($event)" [(ngModel)]='inRendezPoint'>
-    <ion-list-header>
+  <ion-radio-group name="rendez-point-select" (ionChange)="eventChange($event)" [(ngModel)]='inRendezPoint'>
+    <ion-list-header color="dark">
       <ion-label>Did the bot park in the Rendezvous point?</ion-label>
     </ion-list-header>
     <ion-item>
@@ -33,8 +33,8 @@
     </ion-item>
   </ion-radio-group>
 
-  <ion-radio-group name="climb-speed-select" (ionChange)="climbSpeedChange($event)" [(ngModel)]='climbSpeed'>
-    <ion-list-header>
+  <ion-radio-group name="climb-speed-select" (ionChange)="eventChange($event)" [(ngModel)]='climbSpeed'>
+    <ion-list-header color="dark">
       <ion-label>How fast was their climb?</ion-label>
     </ion-list-header>
     <ion-item>
@@ -59,8 +59,8 @@
     </ion-item>
   </ion-radio-group>
 
-  <ion-radio-group name="climbed-num-select" (ionChange)="numClimbedChange($event)" [(ngModel)]='numBotsClimbed'>
-    <ion-list-header>
+  <ion-radio-group name="climbed-num-select" (ionChange)="eventChange($event)" [(ngModel)]='numBotsClimbed'>
+    <ion-list-header color="dark">
       <ion-label>How many bots climbed for your scouted alliance?</ion-label>
     </ion-list-header>
     <ion-item>
@@ -81,8 +81,8 @@
     </ion-item>
   </ion-radio-group>
 
-  <ion-radio-group name="sg-balanced-select" (ionChange)="sgBalanceChange($event)" [(ngModel)]='sgBalanced'>
-    <ion-list-header>
+  <ion-radio-group name="sg-balanced-select" (ionChange)="eventChange($event)" [(ngModel)]='sgBalanced'>
+    <ion-list-header color="dark">
       <ion-label>Did the shield generator balance?</ion-label>
     </ion-list-header>
     <ion-item>
@@ -95,8 +95,8 @@
     </ion-item>
   </ion-radio-group>
 
-  <ion-radio-group name="climbing-position-select" (ionChange)="rendezChange($event)" [(ngModel)]='climbingPosition'>
-    <ion-list-header>
+  <ion-radio-group name="climbing-position-select" (ionChange)="eventChange($event)" [(ngModel)]='climbingPosition'>
+    <ion-list-header color="dark">
       <ion-label>Where did the bot climb?</ion-label>
     </ion-list-header>
     <ion-item>

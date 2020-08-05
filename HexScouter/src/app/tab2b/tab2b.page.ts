@@ -24,42 +24,28 @@ export class Tab2bPage implements OnInit {
   }
 
   async saveJSON(){
-    try{
-      let contents = await Filesystem.readFile({
-        path: 'cache.json',
-        directory: FilesystemDirectory.Cache,
-        encoding: FilesystemEncoding.UTF8
-      });
-      var old = JSON.parse(contents.data);
-    }catch(e){
-      this.presentToast('Error loading Cached Data');
-      console.error('Match Number not Present', e);
-    }
     this.assembleArray();
     var obj = {
-      dateTime: old.dateTime,
-      teamName: old.teamName,
-      matchNum: old.matchNum,
-      position: old.position,
-      scouterName: old.scouterName,
       autoBallsShot: this.autoBallsShot,
       autoBallsScored: this.autoBallsScored,
       autoPassedLine: this.autoPassedLine,
       autoPortsChecked: this.autoPortsChecked
     };
     console.log(obj);
-    if(this.autoBallsShot == null){
-      this.presentToast('Please input number of balls shot');
-    }else if(this.autoBallsScored == null){
-      this.presentToast('Please input number of balls scored');
-    }else if(this.autoPassedLine == null){
-      this.presentToast('Please set if the bot has passed the initiation line');
-    }else if(this.autoPortsChecked == []){
-      this.presentToast('Please check which ports the bot scored in');
-    }else{
+
+    var pass = true;
+    for(let item of Object.values(obj)){
+      if(item == null){
+        this.presentToast('Not all items in previous page have been filled in');
+        pass = false;
+        break;
+      }
+    }
+
+    if(pass){
       try {
         const result = await Filesystem.writeFile({
-          path: 'cache.json',
+          path: 'tab2BCache.json',
           data: JSON.stringify(obj),
           directory: FilesystemDirectory.Cache,
           encoding: FilesystemEncoding.UTF8
@@ -91,7 +77,7 @@ export class Tab2bPage implements OnInit {
   async loadJSON(){
     try{
       let contents = await Filesystem.readFile({
-        path: 'cache.json',
+        path: 'tab2BCache.json',
         directory: FilesystemDirectory.Cache,
         encoding: FilesystemEncoding.UTF8
       });

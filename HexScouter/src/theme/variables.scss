@@ -85,12 +85,12 @@
   --ion-color-danger-tint: #ed576b;
 
   /** dark **/
-  --ion-color-dark: #222428;
-  --ion-color-dark-rgb: 34, 36, 40;
+  --ion-color-dark: #141516;
+  --ion-color-dark-rgb: 20,21,22;
   --ion-color-dark-contrast: #ffffff;
-  --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #1e2023;
-  --ion-color-dark-tint: #383a3e;
+  --ion-color-dark-contrast-rgb: 255,255,255;
+  --ion-color-dark-shade: #121213;
+  --ion-color-dark-tint: #2c2c2d;
 
   /** medium **/
   --ion-color-medium: #92949c;
@@ -107,6 +107,23 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** text-input **/
+  --ion-color-text-input: #0a0a0a;
+  --ion-color-text-input-rgb: 10,10,10;
+  --ion-color-text-input-contrast: #ffffff;
+  --ion-color-text-input-contrast-rgb: 255,255,255;
+  --ion-color-text-input-shade: #090909;
+  --ion-color-text-input-tint: #232323;
+}
+
+.ion-color-text-input {
+  --ion-color-base: var(--ion-color-text-input);
+  --ion-color-base-rgb: var(--ion-color-text-input-rgb);
+  --ion-color-contrast: var(--ion-color-text-input-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-text-input-contrast-rgb);
+  --ion-color-shade: var(--ion-color-text-input-shade);
+  --ion-color-tint: var(--ion-color-text-input-tint);
 }
 
 @media (prefers-color-scheme: dark) {

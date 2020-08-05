@@ -37,18 +37,19 @@ export class Tab2Page {
     };
     console.log(obj);
 
-    if(obj.matchNum == ""){
-      this.presentToast('Please input match number');
-    }else if(obj.teamName == ""){
-      this.presentToast('Please input team name');
-    }else if(obj.position == ""){
-      this.presentToast('Please set your position in the settings tab');
-    }else if(obj.scouterName == ""){
-      this.presentToast('Please set your name in the settings tab');
-    }else{
+    var pass = true;
+    for(let item of Object.values(obj)){
+      if(item == null){
+        this.presentToast('Not all items in previous page or settings have been filled in');
+        pass = false;
+        break;
+      }
+    }
+
+    if(pass){
       try {
         const result = await Filesystem.writeFile({
-          path: 'cache.json',
+          path: 'tab2Cache.json',
           data: JSON.stringify(obj),
           directory: FilesystemDirectory.Cache,
           encoding: FilesystemEncoding.UTF8
@@ -64,7 +65,7 @@ export class Tab2Page {
   async loadJSON(){
     try{
       let contents = await Filesystem.readFile({
-        path: 'cache.json',
+        path: 'tab2Cache.json',
         directory: FilesystemDirectory.Cache,
         encoding: FilesystemEncoding.UTF8
       });
