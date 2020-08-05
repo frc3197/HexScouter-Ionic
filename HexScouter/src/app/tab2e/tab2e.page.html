@@ -1,10 +1,92 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tab2e</ion-title>
+    <ion-title>Additional Information</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-list-header color="dark">
+      <ion-label>Issues</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>None</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='noIssueChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Connectivity</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='connectIssueChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Control Issues</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='controlIssueChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tipped Over</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='tippedIssueChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Parts Broke Off</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='breakingIssueChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Toaster (Communicating, No Movement)</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='toasterIssueChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Brick (Not Communicating)</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='brickIssueChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Power Issues</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='powerIssueChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Other..." [(ngModel)]='otherIssue'></ion-input>
+      <ion-checkbox slot="end" [(ngModel)]='otherIssueChecked'></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header color="dark">
+      <ion-label>Any Penalties?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Yellow Card</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='yellowPenaltyChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Red Card</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='redPenaltyChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Foul</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='foulPenaltyChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tech Foul</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='techPenaltyChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>No penalties</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='noPenaltyChecked'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Couldn't See Penalties</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]='noVisionPenaltyChecked'></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-item color="text-input">
+    <ion-label position="floating">
+      Comments (Minimum 2-3 sentences of actual information, try to make it opinionated, but accurate. 
+      I.e. don't say a team is bad because they are doing worse than us)
+    </ion-label>
+    <ion-textarea auto-grow=true [(ngModel)]='comments'></ion-textarea>
+  </ion-item>
+
+  <ion-button strong=true id="submitButton" (click)="saveCachedForm()">Submit</ion-button>
+
   <div id="nav">
     <ion-button [routerLink]="['/tabs/tab2']" color="primary" id="first">
       1
