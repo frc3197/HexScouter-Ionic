@@ -1,7 +1,5 @@
 # HexScouter-Ionic
 A cross-platform scouting app for FRC team 3197 developed with Ionic. Uses Angular.
-<<<<<<< Updated upstream
-=======
 
 ## Instructions on setting up the Ionic environment
 If you would like to try out the app by yourself, you'll need to set up Ionic.
@@ -22,4 +20,3 @@ For ios, you'll need to run the following on a mac. Add sudo if it doesn't work.
   ionic cap open ios
 
 This should start up XCode. [INSERT iOS INSTRUCTIONS LATER BECAUSE I DON'T REMEMBER HOW THIS WORKED]
->>>>>>> Stashed changes

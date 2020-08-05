@@ -1,10 +1,126 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tab2d</ion-title>
+    <ion-title>Endgame</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-radio-group name="climb-select" (ionChange)="eventChange($event)" [(ngModel)]='climbed'>
+    <ion-list-header color="dark">
+      <ion-label>Did they climb?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Yes</ion-label>
+      <ion-radio slot="start" value=true></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>No</ion-label>
+      <ion-radio slot="start" value=false></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+  <ion-radio-group name="rendez-point-select" (ionChange)="eventChange($event)" [(ngModel)]='inRendezPoint'>
+    <ion-list-header color="dark">
+      <ion-label>Did the bot park in the Rendezvous point?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Yes</ion-label>
+      <ion-radio slot="start" value=true></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>No</ion-label>
+      <ion-radio slot="start" value=false></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+  <ion-radio-group name="climb-speed-select" (ionChange)="eventChange($event)" [(ngModel)]='climbSpeed'>
+    <ion-list-header color="dark">
+      <ion-label>How fast was their climb?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Fast (<5 sec)</ion-label>
+      <ion-radio slot="start" value="fast"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Normal (5-10 sec)</ion-label>
+      <ion-radio slot="start" value="normal"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Slow (10-15 sec)</ion-label>
+      <ion-radio slot="start" value="slow"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Very Slow (>15 sec)</ion-label>
+      <ion-radio slot="start" value="vslow"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Didn't Climb</ion-label>
+      <ion-radio slot="start" value="failed"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+  <ion-radio-group name="climbed-num-select" (ionChange)="eventChange($event)" [(ngModel)]='numBotsClimbed'>
+    <ion-list-header color="dark">
+      <ion-label>How many bots climbed for your scouted alliance?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>0</ion-label>
+      <ion-radio slot="start" value=0></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>1</ion-label>
+      <ion-radio slot="start" value=1></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>2</ion-label>
+      <ion-radio slot="start" value=2></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>3</ion-label>
+      <ion-radio slot="start" value=3></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+  <ion-radio-group name="sg-balanced-select" (ionChange)="eventChange($event)" [(ngModel)]='sgBalanced'>
+    <ion-list-header color="dark">
+      <ion-label>Did the shield generator balance?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Yes</ion-label>
+      <ion-radio slot="start" value=true></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>No</ion-label>
+      <ion-radio slot="start" value=false></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+  <ion-radio-group name="climbing-position-select" (ionChange)="eventChange($event)" [(ngModel)]='climbingPosition'>
+    <ion-list-header color="dark">
+      <ion-label>Where did the bot climb?</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Left</ion-label>
+      <ion-radio slot="start" value="left"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Right</ion-label>
+      <ion-radio slot="start" value="right"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Middle</ion-label>
+      <ion-radio slot="start" value="middle"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Didn't Climb</ion-label>
+      <ion-radio slot="start" value="didn't climb"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Too hard to tell</ion-label>
+      <ion-radio slot="start" value="can't tell"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
   <div id="nav">
     <ion-button [routerLink]="['/tabs/tab2']" color="primary" id="first">
       1
