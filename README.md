@@ -5,8 +5,8 @@ A cross-platform scouting app for FRC team 3197 developed with Ionic. Uses Angul
 If you would like to try out the app by yourself, you'll need to set up Ionic.
 1. Follow the instructions laid out here: https://ionicframework.com/getting-started
 2. Clone the repository-- master will have the stable release while google-sheets is the branch I'm working on. Think of it as normal v. canary.
-3. It's possible the ios and android assets have not been properly built yet. To fix that, navigate to the root directory of HexScouter (not HexScouterDead) and run
-
+3. It's possible the ios and android assets have not been properly built yet.
+To fix that, navigate to the root directory of HexScouter (not HexScouterDead) and run
 
     ionic cap copy
 
