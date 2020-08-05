@@ -17,6 +17,6 @@ for running the android version. This should start Android Studio. Connect your 
 
 For ios, you'll need to run the following on a mac. Add sudo if it doesn't work.
 
-  ionic cap open ios
+    ionic cap open ios
 
 This should start up XCode. [INSERT iOS INSTRUCTIONS LATER BECAUSE I DON'T REMEMBER HOW THIS WORKED]
