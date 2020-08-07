@@ -18,6 +18,8 @@ export class Tab2bPage implements OnInit {
   innerChecked: boolean = null;
   failedChecked: boolean = null;
 
+  canLeave: boolean = null;
+
   constructor(public toastController: ToastController) { }
 
   ngOnInit() {
@@ -33,16 +35,22 @@ export class Tab2bPage implements OnInit {
     };
     console.log(obj);
 
-    var pass = true;
+    if(!this.canLeave){
+
+    }else{
+      this.canLeave = true;
+    }
+    var empty = [];
     for(let item of Object.values(obj)){
-      if(item == null || [] || ""){
+      console.log(item);
+      if(item == null){
         this.presentToast('Not all items in previous page have been filled in');
-        pass = false;
+        this.canLeave = false;
         break;
       }
     }
 
-    if(pass){
+    if(this.canLeave){
       try {
         const result = await Filesystem.writeFile({
           path: 'tab2BCache.json',
@@ -58,7 +66,8 @@ export class Tab2bPage implements OnInit {
     }
   }
 
-  async assembleArray(){
+  assembleArray(){
+    this.canLeave = true;
     this.autoPortsChecked = [];
     if(this.bottomChecked){
       this.autoPortsChecked.push("Bottom Port");
@@ -71,6 +80,10 @@ export class Tab2bPage implements OnInit {
     }
     if(this.failedChecked){
       this.autoPortsChecked.push("Didn't Score");
+    }
+    if(this.autoPortsChecked.length == 0){
+      this.presentToast('Not all items in previous page have been filled in');
+      this.canLeave = false;
     }
   }
 
@@ -111,12 +124,18 @@ export class Tab2bPage implements OnInit {
     }
   }
 
-  ionViewWillLeave(){
-    this.saveJSON();
-  }
+  // ionViewWillLeave(){
+  //   this.saveJSON();
+  // }
 
   ionViewDidEnter(){
     this.loadJSON();
+  }
+
+  async canDeactivate(){
+    await this.saveJSON();
+    console.log("please work");
+    return this.canLeave;
   }
 
   async presentToast(m: String){

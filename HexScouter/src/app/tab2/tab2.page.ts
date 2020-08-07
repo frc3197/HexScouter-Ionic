@@ -89,9 +89,9 @@ export class Tab2Page {
     toast.present();
   }
 
-  ionViewWillLeave(){
-    this.saveJSON();
-  }
+  // ionViewWillLeave(){
+  //   this.saveJSON();
+  // }
 
   ionViewDidEnter(){
     this.loadJSON();
