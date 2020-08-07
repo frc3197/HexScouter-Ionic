@@ -77,10 +77,11 @@ export class Tab2ePage implements OnInit {
       comments: this.comments
     }
     console.log(obj);
+    console.log(Object.values(obj));
 
     var pass = true;
     for(let item of Object.values(obj)){
-      if(item == null){
+      if(item == null || [] || ""){
         this.presentToast('Not all items in previous page have been filled in');
         pass = false;
         break;
@@ -172,7 +173,67 @@ export class Tab2ePage implements OnInit {
   }
 
   async parseArray(obj: any){
-    //TODO: Finish this after testing on tab2c
+    var issues: String[] = obj.issuesChecked;
+    var possibleIssues: String[] = ["No Issues", "Connection Issues",
+                                    "Control Issues", "Tipped", "Breaking Apart",
+                                    "Toaster", "Brick", "Power Issues"];
+    if(issues.includes("No Issues")){
+      this.noIssueChecked = true;
+    }
+    if(issues.includes("Connection Issues")){
+      this.connectIssueChecked = true;
+    }
+    if(issues.includes("Control Issues")){
+      this.controlIssueChecked = true;
+    }
+    if(issues.includes("Tipped")){
+      this.tippedIssueChecked = true;
+    }
+    if(issues.includes("Breaking Apart")){
+      this.breakingIssueChecked = true;
+    }
+    if(issues.includes("Toaster")){
+      this.toasterIssueChecked = true;
+    }
+    if(issues.includes("Brick")){
+      this.brickIssueChecked = true;
+    }
+    if(issues.includes("Power Issues")){
+      this.powerIssueChecked = true;
+    }
+    var otherBool = true;
+    for(let item of possibleIssues){
+      if(issues[issues.length-1] === item){
+        otherBool = false;
+        break;
+      }
+    }
+    if(!otherBool){
+      this.otherIssueChecked = false;
+    }else{
+      this.otherIssueChecked = true;
+      this.otherIssue = issues[issues.length-1];
+    }
+
+    var penalties: String[] = obj.penaltiesChecked;
+    if(issues.includes("Yellow Card")){
+      this.yellowPenaltyChecked = true;
+    }
+    if(issues.includes("Red Card")){
+      this.redPenaltyChecked = true;
+    }
+    if(issues.includes("Foul")){
+      this.foulPenaltyChecked = true;
+    }
+    if(issues.includes("Tech Foul")){
+      this.techPenaltyChecked = true;
+    }
+    if(issues.includes("No Penalties")){
+      this.noPenaltyChecked = true;
+    }
+    if(issues.includes("Couldn't See")){
+      this.noVisionPenaltyChecked = true;
+    }
   }
 
   async presentToast(m: String){

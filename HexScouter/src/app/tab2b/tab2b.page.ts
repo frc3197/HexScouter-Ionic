@@ -35,7 +35,7 @@ export class Tab2bPage implements OnInit {
 
     var pass = true;
     for(let item of Object.values(obj)){
-      if(item == null){
+      if(item == null || [] || ""){
         this.presentToast('Not all items in previous page have been filled in');
         pass = false;
         break;
