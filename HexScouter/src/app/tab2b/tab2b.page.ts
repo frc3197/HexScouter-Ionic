@@ -40,7 +40,6 @@ export class Tab2bPage implements OnInit {
     }else{
       this.canLeave = true;
     }
-    var empty = [];
     for(let item of Object.values(obj)){
       console.log(item);
       if(item == null){
@@ -82,7 +81,7 @@ export class Tab2bPage implements OnInit {
       this.autoPortsChecked.push("Didn't Score");
     }
     if(this.autoPortsChecked.length == 0){
-      this.presentToast('Not all items in previous page have been filled in');
+      this.presentToast('Not all items have been filled in');
       this.canLeave = false;
     }
   }

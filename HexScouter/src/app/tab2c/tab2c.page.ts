@@ -44,6 +44,8 @@ export class Tab2cPage implements OnInit {
   teleFailedCPChecked: boolean = null;
   teleMatchFailCPChecked: boolean = null;
 
+  canLeave: boolean = null;
+
   constructor(public toastController: ToastController) { }
 
   ngOnInit() {
@@ -63,16 +65,20 @@ export class Tab2cPage implements OnInit {
     };
     console.log(obj);
 
-    var pass = true;
+    if(!this.canLeave){
+
+    }else{
+      this.canLeave = true;
+    }
     for(let item of Object.values(obj)){
-      if(item == null || [] || ""){
+      if(item == null){
         this.presentToast('Not all items in previous page have been filled in');
-        pass = false;
+        this.canLeave = false;
         break;
       }
     }
 
-    if(pass){
+    if(this.canLeave){
       try {
         const result = await Filesystem.writeFile({
           path: 'tab2CCache.json',
@@ -89,6 +95,7 @@ export class Tab2cPage implements OnInit {
   }
 
   async assembleArray(){
+    this.canLeave = true;
     this.telePortsChecked = [];
     if(this.teleBottomChecked){
       this.telePortsChecked.push("Bottom Port");
@@ -104,6 +111,11 @@ export class Tab2cPage implements OnInit {
     }
     if(this.teleUnableChecked){
       this.telePortsChecked.push("Unable to Score");
+    }
+    if(this.telePortsChecked.length == 0){
+      this.presentToast('Not all items have been filled in');
+      this.canLeave = false;
+      return false;
     }
 
     this.teleShootPositions = [];
@@ -128,6 +140,11 @@ export class Tab2cPage implements OnInit {
     if(this.teleOtherSPChecked){
       this.teleShootPositions.push(this.shootPositionOther);
     }
+    if(this.teleShootPositions.length == 0){
+      this.presentToast('Not all items have been filled in');
+      this.canLeave = false;
+      return false;
+    }
 
     this.teleIntakePositions = [];
     if(this.teleGroundIPChecked){
@@ -141,6 +158,11 @@ export class Tab2cPage implements OnInit {
     }
     if(this.teleOtherIPChecked){
       this.teleIntakePositions.push(this.intakePositionOther);
+    }
+    if(this.teleIntakePositions.length == 0){
+      this.presentToast('Not all items have been filled in');
+      this.canLeave = false;
+      return false;
     }
 
     this.teleCPMethods = [];
@@ -158,6 +180,11 @@ export class Tab2cPage implements OnInit {
     }
     if(this.teleMatchFailCPChecked){
       this.teleCPMethods.push("Match did not reach high stage");
+    }
+    if(this.teleCPMethods.length == 0){
+      this.presentToast('Not all items have been filled in');
+      this.canLeave = false;
+      return false;
     }
   }
 
@@ -288,11 +315,16 @@ export class Tab2cPage implements OnInit {
     toast.present();
   }
 
-  ionViewWillLeave(){
-    this.saveJSON();
-  }
+  // ionViewWillLeave(){
+  //   this.saveJSON();
+  // }
 
   ionViewDidEnter(){
     this.loadJSON();
+  }
+
+  async canDeactivate(){
+    await this.saveJSON();
+    return this.canLeave;
   }
 }

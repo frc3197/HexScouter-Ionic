@@ -30,6 +30,8 @@ export class Tab2ePage implements OnInit {
 
   comments: String = null;
 
+  canLeave: boolean = null;
+
   constructor(public toastController: ToastController) { }
 
   ngOnInit() {
@@ -37,21 +39,30 @@ export class Tab2ePage implements OnInit {
 
   async saveCachedForm(){
     var obj = await this.assembleCachedForm();
-    var filename = "Match_" + obj.matchNum + ".json";
-    try{
-      const result = await Filesystem.writeFile({
-        path: filename,
-        data: JSON.stringify(obj),
-        directory: FilesystemDirectory.Data,
-        encoding: FilesystemEncoding.UTF8
-      })
-    }catch(e){
-
+    if(!obj){
+      return false;
     }
+    this.presentToast("Saving Form...");
+    var filename = "Match_" + obj.matchNum + ".json";
+    console.log(filename);
+    // try{
+    //   const result = await Filesystem.writeFile({
+    //     path: filename,
+    //     data: JSON.stringify(obj),
+    //     directory: FilesystemDirectory.Data,
+    //     encoding: FilesystemEncoding.UTF8
+    //   })
+    // }catch(e){
+    //   this.presentToast('Unable to save results. Please try again.');
+    //   console.error('Error saving cached form', e);
+    // }
   }
 
   async assembleCachedForm(){
-    //TODO: Finish after confirming all saveJSON() and loadJSON() functions work
+    this.saveJSON();
+    if(!this.canLeave){
+      return false;
+    }
     try{
       let contents = await Filesystem.readFile({
         path: 'tab2Cache.json',
@@ -59,6 +70,34 @@ export class Tab2ePage implements OnInit {
         encoding: FilesystemEncoding.UTF8
       });
       var tab2Cache = JSON.parse(contents.data);
+
+      let contents2b = await Filesystem.readFile({
+        path: 'tab2BCache.json',
+        directory: FilesystemDirectory.Cache,
+        encoding: FilesystemEncoding.UTF8
+      });
+      var tab2BCache = JSON.parse(contents2b.data);
+
+      let contents2c = await Filesystem.readFile({
+        path: 'tab2CCache.json',
+        directory: FilesystemDirectory.Cache,
+        encoding: FilesystemEncoding.UTF8
+      });
+      var tab2CCache = JSON.parse(contents2c.data);
+
+      let contents2d = await Filesystem.readFile({
+        path: 'tab2DCache.json',
+        directory: FilesystemDirectory.Cache,
+        encoding: FilesystemEncoding.UTF8
+      });
+      var tab2DCache = JSON.parse(contents2d.data);
+
+      let contents2e = await Filesystem.readFile({
+        path: 'tab2ECache.json',
+        directory: FilesystemDirectory.Cache,
+        encoding: FilesystemEncoding.UTF8
+      });
+      var tab2ECache = JSON.parse(contents2e.data);
     }catch(e){
       this.presentToast('Error loading Cached Data-- Page 1 may not have completed entries');
       console.error('Error loading tab2 Cache', e);
@@ -66,6 +105,7 @@ export class Tab2ePage implements OnInit {
     var thing = {
       matchNum: tab2Cache.matchNum
     }
+    console.log(thing);
     return thing;
   }
 
@@ -79,16 +119,20 @@ export class Tab2ePage implements OnInit {
     console.log(obj);
     console.log(Object.values(obj));
 
-    var pass = true;
+    if(!this.canLeave){
+
+    }else{
+      this.canLeave = true;
+    }
     for(let item of Object.values(obj)){
-      if(item == null || [] || ""){
+      if(item == null){
         this.presentToast('Not all items in previous page have been filled in');
-        pass = false;
+        this.canLeave = false;
         break;
       }
     }
 
-    if(pass){
+    if(this.canLeave){
       try {
         const result = await Filesystem.writeFile({
           path: 'tab2ECache.json',
@@ -105,6 +149,7 @@ export class Tab2ePage implements OnInit {
   }
 
   assembleArray(){
+    this.canLeave = true;
     this.issuesChecked = [];
     if(this.noIssueChecked){
       this.issuesChecked.push("No Issues");
@@ -133,6 +178,11 @@ export class Tab2ePage implements OnInit {
     if(this.otherIssueChecked){
       this.issuesChecked.push(this.otherIssue);
     }
+    if(this.issuesChecked.length == 0){
+      this.presentToast('Not all items have been filled in');
+      this.canLeave = false;
+      return false;
+    }
 
     this.penaltiesChecked = [];
     if(this.yellowPenaltyChecked){
@@ -152,6 +202,11 @@ export class Tab2ePage implements OnInit {
     }
     if(this.noVisionPenaltyChecked){
       this.penaltiesChecked.push("Couldn't See");
+    }
+    if(this.penaltiesChecked.length == 0){
+      this.presentToast('Not all items have been filled in');
+      this.canLeave = false;
+      return false;
     }
   }
 
@@ -244,8 +299,13 @@ export class Tab2ePage implements OnInit {
     toast.present();
   }
 
-  ionViewWillLeave(){
-    this.saveJSON();
+  // ionViewWillLeave(){
+  //   this.saveJSON();
+  // }
+
+  async canDeactivate(){
+    await this.saveJSON();
+    return this.canLeave;
   }
 
   ionViewDidEnter(){
