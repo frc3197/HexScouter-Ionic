@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Filesystem, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
 
@@ -14,6 +14,8 @@ export class Tab2dPage implements OnInit {
   numBotsClimbed: number = null;
   sgBalanced: boolean = null;
   climbingPosition: String = null;
+
+  canLeave: boolean = null;
 
   constructor(public toastController: ToastController) { }
 
@@ -31,16 +33,17 @@ export class Tab2dPage implements OnInit {
     }
     console.log(obj);
 
-    var pass = true;
+    this.canLeave = true;
     for(let item of Object.values(obj)){
       if(item == null){
         this.presentToast('Not all items in previous page have been filled in');
-        pass = false;
+        console.log(item);
+        this.canLeave = false;
         break;
       }
     }
 
-    if(pass){
+    if(this.canLeave){
       try {
         const result = await Filesystem.writeFile({
           path: 'tab2DCache.json',
@@ -76,12 +79,19 @@ export class Tab2dPage implements OnInit {
     }
   }
 
-  ionViewWillLeave(){
-    this.saveJSON();
-  }
+  // ionViewWillLeave(){
+  //   this.saveJSON();
+  // }
 
   ionViewDidEnter(){
     this.loadJSON();
+  }
+
+  async canDeactivate(){
+    await this.saveJSON();
+    console.log("please work");
+    console.log(this.canLeave)
+    return this.canLeave;
   }
 
   async presentToast(m: String){
@@ -94,5 +104,15 @@ export class Tab2dPage implements OnInit {
 
   eventChange(event){
     console.log(event.detail.value);
+  }
+
+  reset(){
+    //TODO: Deprecate and remove since this is only for debug
+    this.climbed = null;
+    this.inRendezPoint = null;
+    this.climbSpeed = null;
+    this.numBotsClimbed = null;
+    this.sgBalanced = null;
+    this.climbingPosition = null;
   }
 }

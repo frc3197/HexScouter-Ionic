@@ -5,11 +5,13 @@ import { Tab2bPage } from './tab2b.page';
 import { Tab2cPage } from '../tab2c/tab2c.page';
 import { Tab2dPage } from '../tab2d/tab2d.page';
 import { Tab2ePage } from '../tab2e/tab2e.page';
+import { FormGuardGuard } from '../form-guard.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab2bPage
+    component: Tab2bPage,
+    canDeactivate: [FormGuardGuard]
   },
   { path: '/tabs/tab2', component: Tab2Page },
   { path: '/tabs/tab2b', component: Tab2bPage },

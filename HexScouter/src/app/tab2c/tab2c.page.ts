@@ -44,6 +44,8 @@ export class Tab2cPage implements OnInit {
   teleFailedCPChecked: boolean = null;
   teleMatchFailCPChecked: boolean = null;
 
+  canLeave: boolean = null;
+
   constructor(public toastController: ToastController) { }
 
   ngOnInit() {
@@ -63,16 +65,20 @@ export class Tab2cPage implements OnInit {
     };
     console.log(obj);
 
-    var pass = true;
+    if(!this.canLeave){
+
+    }else{
+      this.canLeave = true;
+    }
     for(let item of Object.values(obj)){
       if(item == null){
         this.presentToast('Not all items in previous page have been filled in');
-        pass = false;
+        this.canLeave = false;
         break;
       }
     }
 
-    if(pass){
+    if(this.canLeave){
       try {
         const result = await Filesystem.writeFile({
           path: 'tab2CCache.json',
@@ -89,6 +95,7 @@ export class Tab2cPage implements OnInit {
   }
 
   async assembleArray(){
+    this.canLeave = true;
     this.telePortsChecked = [];
     if(this.teleBottomChecked){
       this.telePortsChecked.push("Bottom Port");
@@ -105,13 +112,18 @@ export class Tab2cPage implements OnInit {
     if(this.teleUnableChecked){
       this.telePortsChecked.push("Unable to Score");
     }
+    if(this.telePortsChecked.length == 0){
+      this.presentToast('Not all items have been filled in');
+      this.canLeave = false;
+      return false;
+    }
 
     this.teleShootPositions = [];
     if(this.teleTrenchSPChecked){
       this.teleShootPositions.push("Trench");
     }
     if(this.teleFrontPPSPChecked){
-      this.teleShootPositions.push("In front of Power Port");
+      this.teleShootPositions.push("In Front of Power Port");
     }
     if(this.teleInitSPChecked){
       this.teleShootPositions.push("Initiation Line");
@@ -128,6 +140,11 @@ export class Tab2cPage implements OnInit {
     if(this.teleOtherSPChecked){
       this.teleShootPositions.push(this.shootPositionOther);
     }
+    if(this.teleShootPositions.length == 0){
+      this.presentToast('Not all items have been filled in');
+      this.canLeave = false;
+      return false;
+    }
 
     this.teleIntakePositions = [];
     if(this.teleGroundIPChecked){
@@ -141,6 +158,11 @@ export class Tab2cPage implements OnInit {
     }
     if(this.teleOtherIPChecked){
       this.teleIntakePositions.push(this.intakePositionOther);
+    }
+    if(this.teleIntakePositions.length == 0){
+      this.presentToast('Not all items have been filled in');
+      this.canLeave = false;
+      return false;
     }
 
     this.teleCPMethods = [];
@@ -158,6 +180,11 @@ export class Tab2cPage implements OnInit {
     }
     if(this.teleMatchFailCPChecked){
       this.teleCPMethods.push("Match did not reach high stage");
+    }
+    if(this.teleCPMethods.length == 0){
+      this.presentToast('Not all items have been filled in');
+      this.canLeave = false;
+      return false;
     }
   }
 
@@ -181,11 +208,103 @@ export class Tab2cPage implements OnInit {
     }
   }
 
-  async parseArray(obj: any){
+  async parseArray(obj: any){ //I hate this entire method so much
     console.log("parseArray obj");
     console.log(obj);
     var portsChecked: String[] = obj.telePortsChecked;
-    //TODO: Finish this
+    if(portsChecked.includes("Bottom Port")){
+      this.teleBottomChecked = true;
+    }
+    if(portsChecked.includes("Outer Port")){
+      this.teleOuterChecked = true;
+    }
+    if(portsChecked.includes("Inner Port")){
+      this.teleInnerChecked = true;
+    }
+    if(portsChecked.includes("Didn't Score")){
+      this.teleFailedChecked = true;
+    }
+    if(portsChecked.includes("Unable to Score")){
+      this.teleUnableChecked = true;
+    }
+
+    var shootPositions: String[] = obj.teleShootPositions;
+    var possibleSP: String[] = ["Trench", "In Front of Power Port", 
+                              "Initiation Line", "Shield Generator",
+                              "Can't Shoot", "Didn't Shoot"];
+    if(shootPositions.includes("Trench")){
+      this.teleTrenchSPChecked = true;
+    }
+    if(shootPositions.includes("In Front of Power Port")){
+      this.teleFrontPPSPChecked = true;
+    }
+    if(shootPositions.includes("Initiation Line")){
+      this.teleInitSPChecked = true;
+    }
+    if(shootPositions.includes("Shield Generator")){
+      this.teleShieldSPChecked = true;
+    }
+    if(shootPositions.includes("Can't Shoot")){
+      this.teleUnableSPChecked = true;
+    }
+    if(shootPositions.includes("Didn't Shoot")){
+      this.teleFailedSPChecked = true;
+    }
+    var otherBool = true;
+    for(let item of possibleSP){
+      if(shootPositions[shootPositions.length-1] === item){
+        otherBool = false;
+        break;
+      }
+    }
+    if(!otherBool){
+      this.teleOtherSPChecked = false;
+    }else{
+      this.teleOtherSPChecked = true;
+      this.shootPositionOther = shootPositions[shootPositions.length-1];
+    }
+
+    var intakePositions: String[] = obj.teleIntakePositions;
+    var possibleIP: String[] = ["Ground", "Loading Station", "Neither"];
+    if(intakePositions.includes("Ground")){
+      this.teleGroundIPChecked = true;
+    }
+    if(intakePositions.includes("Loading Station")){
+      this.teleLoadingIPChecked = true;
+    }
+    if(intakePositions.includes("Neither")){
+      this.teleNeitherIPChecked = true;
+    }
+    var otherBool2 = true;
+    for(let item of possibleIP){
+      if(intakePositions[intakePositions.length-1] == item){
+        otherBool2 = false;
+        break;
+      }
+    }
+    if(!otherBool2){
+      this.teleOtherIPChecked = false;
+    }else{
+      this.teleOtherIPChecked = true;
+      this.intakePositionOther = intakePositions[intakePositions.length-1];
+    }
+
+    var cpMethods: String[] = obj.teleCPMethods;
+    if(cpMethods.includes("Stage 2")){
+      this.teleStage2CPChecked = true;
+    }
+    if(cpMethods.includes("Stage 3")){
+      this.teleStage3CPChecked = true;
+    }
+    if(cpMethods.includes("Didn't Manipulate the Control Panel")){
+      this.teleNeitherCPChecked = true;
+    }
+    if(cpMethods.includes("Can't Manipulate the Control Panel")){
+      this.teleFailedCPChecked = true;
+    }
+    if(cpMethods.includes("Match did not reach high stage")){
+      this.teleMatchFailCPChecked = true;
+    }
   }
 
   async presentToast(m: String){
@@ -196,11 +315,16 @@ export class Tab2cPage implements OnInit {
     toast.present();
   }
 
-  ionViewWillLeave(){
-    this.saveJSON();
-  }
+  // ionViewWillLeave(){
+  //   this.saveJSON();
+  // }
 
   ionViewDidEnter(){
     this.loadJSON();
+  }
+
+  async canDeactivate(){
+    await this.saveJSON();
+    return this.canLeave;
   }
 }

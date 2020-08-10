@@ -9,8 +9,9 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  teamName: String = "";
-  matchNum: String = "";
+  teamName: String = null;
+  matchNum: String = null;
+  canLeave: boolean = null;
   
   constructor(public toastController: ToastController) {}
   
@@ -37,16 +38,17 @@ export class Tab2Page {
     };
     console.log(obj);
 
-    var pass = true;
+    this.canLeave = true;
     for(let item of Object.values(obj)){
       if(item == null){
         this.presentToast('Not all items in previous page or settings have been filled in');
-        pass = false;
+        console.log("Cannot leave");
+        this.canLeave = false;
         break;
       }
     }
 
-    if(pass){
+    if(this.canLeave){
       try {
         const result = await Filesystem.writeFile({
           path: 'tab2Cache.json',
@@ -87,11 +89,19 @@ export class Tab2Page {
     toast.present();
   }
 
-  ionViewWillLeave(){
-    this.saveJSON();
-  }
+  // ionViewWillLeave(){
+  //   this.saveJSON();
+  // }
 
   ionViewDidEnter(){
+    this.teamName = null;
+    this.matchNum = null;
     this.loadJSON();
+  }
+
+  async canDeactivate(){
+    await this.saveJSON();
+    console.log("please work");
+    return this.canLeave;
   }
 }
