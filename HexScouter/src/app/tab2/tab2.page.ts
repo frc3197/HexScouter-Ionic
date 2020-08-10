@@ -9,8 +9,8 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  teamName: String = "";
-  matchNum: String = "";
+  teamName: String = null;
+  matchNum: String = null;
   canLeave: boolean = null;
   
   constructor(public toastController: ToastController) {}
@@ -94,6 +94,8 @@ export class Tab2Page {
   // }
 
   ionViewDidEnter(){
+    this.teamName = null;
+    this.matchNum = null;
     this.loadJSON();
   }
 

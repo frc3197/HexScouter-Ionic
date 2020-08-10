@@ -39,29 +39,72 @@ export class Tab2ePage implements OnInit {
 
   async saveCachedForm(){
     var obj = await this.assembleCachedForm();
-    if(!obj){
+    if(!this.canLeave){
       return false;
     }
     this.presentToast("Saving Form...");
-    var filename = "Match_" + obj.matchNum + ".json";
+    if(obj.matchNum == null){
+      return false;
+    }
+    var filename = "match_" + obj.matchNum + ".json";
     console.log(filename);
-    // try{
-    //   const result = await Filesystem.writeFile({
-    //     path: filename,
-    //     data: JSON.stringify(obj),
-    //     directory: FilesystemDirectory.Data,
-    //     encoding: FilesystemEncoding.UTF8
-    //   })
-    // }catch(e){
-    //   this.presentToast('Unable to save results. Please try again.');
-    //   console.error('Error saving cached form', e);
-    // }
+    try{
+      const result = await Filesystem.writeFile({
+        path: filename,
+        data: JSON.stringify(obj),
+        directory: FilesystemDirectory.Data,
+        encoding: FilesystemEncoding.UTF8
+      })
+      console.log('Wrote file', result);
+      this.clearAllCaches();
+    }catch(e){
+      this.presentToast('Unable to save results. Please try again.');
+      console.error('Error saving cached form', e);
+    }
+  }
+
+  clearAllCaches(){
+    try{
+      const result2 = Filesystem.deleteFile({
+        path: 'tab2Cache.json',
+        directory: FilesystemDirectory.Cache
+      });
+      console.log('Deleted file', result2);
+
+      const result2b = Filesystem.deleteFile({
+        path: 'tab2BCache.json',
+        directory: FilesystemDirectory.Cache
+      });
+      console.log('Deleted file', result2b);
+
+      const result2c = Filesystem.deleteFile({
+        path: 'tab2CCache.json',
+        directory: FilesystemDirectory.Cache
+      });
+      console.log('Deleted file', result2c);
+
+      const result2d = Filesystem.deleteFile({
+        path: 'tab2DCache.json',
+        directory: FilesystemDirectory.Cache
+      });
+      console.log('Deleted file', result2d);
+
+      const result2e = Filesystem.deleteFile({
+        path: 'tab2ECache.json',
+        directory: FilesystemDirectory.Cache
+      });
+      console.log('Deleted file', result2e);
+    }catch(e){
+      this.presentToast('Unable to delete all cached files. Please try again.');
+      console.error('Error deleting caches', e);
+    }
   }
 
   async assembleCachedForm(){
+    var blank = {matchNum: null};
     this.saveJSON();
     if(!this.canLeave){
-      return false;
+      return blank;
     }
     try{
       let contents = await Filesystem.readFile({
@@ -103,7 +146,32 @@ export class Tab2ePage implements OnInit {
       console.error('Error loading tab2 Cache', e);
     }
     var thing = {
-      matchNum: tab2Cache.matchNum
+      dateTime: tab2Cache.dateTime,
+      teamName: tab2Cache.teamName,
+      matchNum: tab2Cache.matchNum,
+      position: tab2Cache.position,
+      scouterName: tab2Cache.scouterName,
+      autoBallsShot: tab2BCache.autoBallsShot,
+      autoBallsScored: tab2BCache.autoBallsScored,
+      autoPassedLine: tab2BCache.autoPassedLine,
+      autoPortsChecked: tab2BCache.autoPortsChecked,
+      telePortsChecked: tab2CCache.telePortsChecked,
+      teleShootPositions: tab2CCache.teleShootPositions,
+      teleBallsAttemptedUpper: tab2CCache.teleBallsAttemptedUpper,
+      teleBallsScoredUpper: tab2CCache.teleBallsScoredUpper,
+      teleBallsAttemptedBottom: tab2CCache.teleBallsAttemptedBottom,
+      teleBallsScoredBottom: tab2CCache.teleBallsScoredBottom,
+      teleIntakePositions: tab2CCache.teleIntakePositions,
+      teleCPMethods: tab2CCache.teleCPMethods,
+      climbed: tab2DCache.climbed,
+      inRendezPoint: tab2DCache.inRendezPoint,
+      climbSpeed: tab2DCache.climbSpeed,
+      numBotsClimbed: tab2DCache.numBotsClimbed,
+      sgBalanced: tab2DCache.sgBalanced,
+      climbingPosition: tab2DCache.climbingPosition,
+      issuesChecked: tab2ECache.issuesChecked,
+      penaltiesChecked: tab2ECache.penaltiesChecked,
+      comments: tab2ECache.comments
     }
     console.log(thing);
     return thing;
@@ -271,22 +339,22 @@ export class Tab2ePage implements OnInit {
     }
 
     var penalties: String[] = obj.penaltiesChecked;
-    if(issues.includes("Yellow Card")){
+    if(penalties.includes("Yellow Card")){
       this.yellowPenaltyChecked = true;
     }
-    if(issues.includes("Red Card")){
+    if(penalties.includes("Red Card")){
       this.redPenaltyChecked = true;
     }
-    if(issues.includes("Foul")){
+    if(penalties.includes("Foul")){
       this.foulPenaltyChecked = true;
     }
-    if(issues.includes("Tech Foul")){
+    if(penalties.includes("Tech Foul")){
       this.techPenaltyChecked = true;
     }
-    if(issues.includes("No Penalties")){
+    if(penalties.includes("No Penalties")){
       this.noPenaltyChecked = true;
     }
-    if(issues.includes("Couldn't See")){
+    if(penalties.includes("Couldn't See")){
       this.noVisionPenaltyChecked = true;
     }
   }
@@ -309,6 +377,29 @@ export class Tab2ePage implements OnInit {
   }
 
   ionViewDidEnter(){
+    this.issuesChecked = [];
+    this.noIssueChecked = null;
+    this.connectIssueChecked = null;
+    this.controlIssueChecked = null;
+    this.tippedIssueChecked = null;
+    this.breakingIssueChecked = null;
+    this.toasterIssueChecked = null;
+    this.brickIssueChecked = null;
+    this.powerIssueChecked = null;
+    this.otherIssueChecked = null;
+    this.otherIssue = null;
+
+    this.penaltiesChecked = [];
+    this.yellowPenaltyChecked = null;
+    this.redPenaltyChecked = null;
+    this.foulPenaltyChecked = null;
+    this.techPenaltyChecked = null;
+    this.noPenaltyChecked = null;
+    this.noVisionPenaltyChecked = null;
+
+    this.comments = null;
+
+    this.canLeave = null;
     this.loadJSON();
   }
 
