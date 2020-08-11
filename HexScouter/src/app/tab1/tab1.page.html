@@ -17,7 +17,7 @@
           <ion-card-title>
             Match {{ form.matchNum }}
           </ion-card-title>
-          Team {{ form.teamName }} (Position: {{ form.position }})
+          Team {{ form.teamName }} at {{ form.regional }} (Position: {{ form.position }})
         </ion-card-header>
         <ion-ripple-effect></ion-ripple-effect>
         <ion-button *ngIf="visible[i]" (click)="loadFormIntoCache(form.matchNum, i); toggle(i)">View/Edit</ion-button>

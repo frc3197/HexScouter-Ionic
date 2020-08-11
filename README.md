@@ -9,13 +9,24 @@ If you would like to try out the app by yourself, you'll need to set up Ionic.
 
   ionic cap copy
 
-This should copy all of the web assets to android and ios. This may take a while. From there, run
+This should copy all of the web assets to android and ios. This may take a while.
+
+## Instructions on running the app in a browser
+Run the following command
+
+  ionic serve
+
+This should start up a development server that will update as changes are made to the source code. From there, open up a browser and go to localhost:8100 and you should see the app.
+
+## Instructions on running the app on an Android device
+Run the following command
 
   ionic cap open android
 
-for running the android version. This should start Android Studio. Connect your android phone and activate debugging mode if you haven't done so already. Once your phone name shows up in Android Studio, click the play button to run the app on your phone.
+This should start Android Studio after a bit of loading. Connect your android phone and activate debugging mode if you haven't done so already. Once your phone name shows up in Android Studio, click the play button to run the app on your phone.
 
-For ios, you'll need to run the following on a mac. Add sudo if it doesn't work.
+## Instructions on running the app on an Apple device
+For iOS, you'll need to run the following on a mac. Add sudo if it doesn't work.
 
   ionic cap open ios
 
