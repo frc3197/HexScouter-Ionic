@@ -30,6 +30,7 @@ export class Tab2Page {
     }
 
     var obj = {
+      regional: settings.regional,
       dateTime: currentDateTime,
       teamName: this.teamName, 
       matchNum: this.matchNum,

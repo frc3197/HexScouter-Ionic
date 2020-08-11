@@ -1,16 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Forms
-    </ion-title>
+    <ion-row>
+      <ion-title>
+        Forms
+      </ion-title>
+      <ion-button>Upload Forms</ion-button>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Forms</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ng-container *ngFor="let form of forms; let i = index">
+    <!-- <ion-button> -->
+      <ion-card (click)="toggle(i)" class="ion-activatable ripple-parent">
+        <ion-card-header>
+          <ion-card-title>
+            Match {{ form.matchNum }}
+          </ion-card-title>
+          Team {{ form.teamName }} (Position: {{ form.position }})
+        </ion-card-header>
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-button *ngIf="visible[i]" (click)="loadFormIntoCache(form.matchNum, i); toggle(i)">View/Edit</ion-button>
+        <ion-button *ngIf="visible[i]" (click)="deleteForm(form.matchNum); toggle(i)">Delete</ion-button>
+      </ion-card>
+    <!-- </ion-button> -->
+    </ng-container>
 
 </ion-content>

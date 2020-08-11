@@ -46,7 +46,7 @@ export class Tab2ePage implements OnInit {
     if(obj.matchNum == null){
       return false;
     }
-    var filename = "match_" + obj.matchNum + ".json";
+    var filename = "forms/match_" + obj.matchNum + ".json";
     console.log(filename);
     try{
       const result = await Filesystem.writeFile({
@@ -142,10 +142,11 @@ export class Tab2ePage implements OnInit {
       });
       var tab2ECache = JSON.parse(contents2e.data);
     }catch(e){
-      this.presentToast('Error loading Cached Data-- Page 1 may not have completed entries');
+      this.presentToast('Error loading Cached Data-- How did you even get this error?');
       console.error('Error loading tab2 Cache', e);
     }
     var thing = {
+      regional: tab2Cache.regional,
       dateTime: tab2Cache.dateTime,
       teamName: tab2Cache.teamName,
       matchNum: tab2Cache.matchNum,
@@ -207,7 +208,7 @@ export class Tab2ePage implements OnInit {
           data: JSON.stringify(obj),
           directory: FilesystemDirectory.Cache,
           encoding: FilesystemEncoding.UTF8
-        })
+        });
         console.log('Wrote file', result);
       } catch(e){
         this.presentToast('An Error Occured');
