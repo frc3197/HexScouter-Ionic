@@ -16,7 +16,7 @@ This should copy all of the web assets to android and ios. This may take a while
 ## Instructions on running the app in a browser
 Run the following command
 
-  ionic serve
+    ionic serve
 
 This should start up a development server that will update as changes are made to the source code. From there, open up a browser and go to localhost:8100 and you should see the app.
 
