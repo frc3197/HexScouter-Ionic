@@ -128,6 +128,15 @@ export class Tab2bPage implements OnInit {
   // }
 
   ionViewDidEnter(){
+    this.autoBallsShot = null;
+    this.autoBallsScored = null;
+    this.autoPassedLine = null;
+  
+    this.autoPortsChecked = [];
+    this.bottomChecked = null;
+    this.outerChecked = null;
+    this.innerChecked = null;
+    this.failedChecked = null;
     this.loadJSON();
   }
 

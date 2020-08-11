@@ -320,6 +320,42 @@ export class Tab2cPage implements OnInit {
   // }
 
   ionViewDidEnter(){
+    this.telePortsChecked = [];
+    this.teleBottomChecked = null;
+    this.teleOuterChecked = null;
+    this.teleInnerChecked = null;
+    this.teleFailedChecked = null;
+    this.teleUnableChecked = null;
+
+    this.teleShootPositions = [];
+    this.teleTrenchSPChecked = null;
+    this.teleFrontPPSPChecked = null;
+    this.teleInitSPChecked = null;
+    this.teleShieldSPChecked = null;
+    this.teleUnableSPChecked = null;
+    this.teleFailedSPChecked = null;
+    this.teleOtherSPChecked = null;
+    this.shootPositionOther = "";
+
+    this.teleBallsAttemptedUpper = null;
+    this.teleBallsScoredUpper = null;
+    this.teleBallsAttemptedBottom = null;
+    this.teleBallsScoredBottom = null;
+
+    this.teleIntakePositions = [];
+    this.teleGroundIPChecked = null;
+    this.teleLoadingIPChecked = null;
+    this.teleNeitherIPChecked = null;
+    this.teleOtherIPChecked = null;
+    this.intakePositionOther = "";
+
+    this.teleCPMethods = [];
+    this.teleStage2CPChecked = null;
+    this.teleStage3CPChecked = null;
+    this.teleNeitherCPChecked = null;
+    this.teleFailedCPChecked = null;
+    this.teleMatchFailCPChecked = null;
+
     this.loadJSON();
   }
 

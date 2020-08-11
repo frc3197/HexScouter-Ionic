@@ -84,6 +84,12 @@ export class Tab2dPage implements OnInit {
   // }
 
   ionViewDidEnter(){
+    this.climbed = null;
+    this.inRendezPoint = null;
+    this.climbSpeed = null;
+    this.numBotsClimbed = null;
+    this.sgBalanced = null;
+    this.climbingPosition = null;
     this.loadJSON();
   }
 
