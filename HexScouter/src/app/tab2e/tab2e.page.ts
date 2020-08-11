@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Filesystem, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2e',
@@ -32,35 +33,55 @@ export class Tab2ePage implements OnInit {
 
   canLeave: boolean = null;
 
-  constructor(public toastController: ToastController) { }
+  constructor(public toastController: ToastController, public router: Router, public alertController: AlertController) { }
 
   ngOnInit() {
   }
 
   async saveCachedForm(){
-    var obj = await this.assembleCachedForm();
-    if(!this.canLeave){
-      return false;
-    }
-    this.presentToast("Saving Form...");
-    if(obj.matchNum == null){
-      return false;
-    }
-    var filename = "forms/match_" + obj.matchNum + ".json";
-    console.log(filename);
-    try{
-      const result = await Filesystem.writeFile({
-        path: filename,
-        data: JSON.stringify(obj),
-        directory: FilesystemDirectory.Data,
-        encoding: FilesystemEncoding.UTF8
-      })
-      console.log('Wrote file', result);
-      this.clearAllCaches();
-    }catch(e){
-      this.presentToast('Unable to save results. Please try again.');
-      console.error('Error saving cached form', e);
-    }
+    const alert = await this.alertController.create({
+      header: 'Save Form?',
+      message: 'Would you like to save this Form?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('User selected No');
+          }
+        }, {
+          text: 'Yes',
+          handler: async () => {
+            var obj = await this.assembleCachedForm();
+            if(!this.canLeave){
+              return false;
+            }
+            this.presentToast("Saving Form...");
+            if(obj.matchNum == null){
+              return false;
+            }
+            var filename = "forms/match_" + obj.matchNum + ".json";
+            console.log(filename);
+            try{
+              const result = await Filesystem.writeFile({
+                path: filename,
+                data: JSON.stringify(obj),
+                directory: FilesystemDirectory.Data,
+                encoding: FilesystemEncoding.UTF8
+              })
+              console.log('Wrote file', result);
+              this.clearAllCaches();
+            }catch(e){
+              this.presentToast('Unable to save results. Please try again.');
+              console.error('Error saving cached form', e);
+            }
+            this.router.navigate(['/tabs/tab1']);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   clearAllCaches(){
