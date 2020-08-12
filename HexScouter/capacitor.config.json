@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "HexScout",
+  "appId": "io.ionic.hexscouter",
+  "appName": "HexScouter",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
