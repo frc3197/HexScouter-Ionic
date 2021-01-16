@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: '',
     component: Tab2bPage,
-    canDeactivate: [FormGuardGuard]
+    //canDeactivate: [FormGuardGuard]
   },
   { path: '/tabs/tab2', component: Tab2Page },
   { path: '/tabs/tab2b', component: Tab2bPage },

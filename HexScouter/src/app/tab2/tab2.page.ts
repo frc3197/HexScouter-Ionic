@@ -40,14 +40,14 @@ export class Tab2Page {
     console.log(obj);
 
     this.canLeave = true;
-    for(let item of Object.values(obj)){
-      if(item == null){
-        this.presentToast('Not all items in previous page or settings have been filled in');
-        console.log("Cannot leave");
-        this.canLeave = false;
-        break;
-      }
-    }
+    // for(let item of Object.values(obj)){
+    //   if(item == null){
+    //     this.presentToast('Not all items in previous page or settings have been filled in');
+    //     console.log("Cannot leave");
+    //     this.canLeave = false;
+    //     break;
+    //   }
+    // }
 
     if(this.canLeave){
       try {
@@ -90,9 +90,9 @@ export class Tab2Page {
     toast.present();
   }
 
-  // ionViewWillLeave(){
-  //   this.saveJSON();
-  // }
+  ionViewWillLeave(){
+    this.saveJSON();
+  }
 
   ionViewDidEnter(){
     this.teamName = null;

@@ -34,14 +34,14 @@ export class Tab2dPage implements OnInit {
     console.log(obj);
 
     this.canLeave = true;
-    for(let item of Object.values(obj)){
-      if(item == null){
-        this.presentToast('Not all items in previous page have been filled in');
-        console.log(item);
-        this.canLeave = false;
-        break;
-      }
-    }
+    // for(let item of Object.values(obj)){
+    //   if(item == null){
+    //     this.presentToast('Not all items in previous page have been filled in');
+    //     console.log(item);
+    //     this.canLeave = false;
+    //     break;
+    //   }
+    // }
 
     if(this.canLeave){
       try {
@@ -79,9 +79,9 @@ export class Tab2dPage implements OnInit {
     }
   }
 
-  // ionViewWillLeave(){
-  //   this.saveJSON();
-  // }
+  ionViewWillLeave(){
+    this.saveJSON();
+  }
 
   ionViewDidEnter(){
     this.climbed = null;

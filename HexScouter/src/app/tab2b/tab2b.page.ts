@@ -40,14 +40,14 @@ export class Tab2bPage implements OnInit {
     }else{
       this.canLeave = true;
     }
-    for(let item of Object.values(obj)){
-      console.log(item);
-      if(item == null){
-        this.presentToast('Not all items in previous page have been filled in');
-        this.canLeave = false;
-        break;
-      }
-    }
+    // for(let item of Object.values(obj)){
+    //   console.log(item);
+    //   if(item == null){
+    //     this.presentToast('Not all items in previous page have been filled in');
+    //     this.canLeave = false;
+    //     break;
+    //   }
+    // }
 
     if(this.canLeave){
       try {
@@ -123,9 +123,9 @@ export class Tab2bPage implements OnInit {
     }
   }
 
-  // ionViewWillLeave(){
-  //   this.saveJSON();
-  // }
+  ionViewWillLeave(){
+    this.saveJSON();
+  }
 
   ionViewDidEnter(){
     this.autoBallsShot = null;

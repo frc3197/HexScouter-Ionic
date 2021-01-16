@@ -33,6 +33,8 @@ export class Tab2ePage implements OnInit {
 
   canLeave: boolean = null;
 
+  saving: boolean = null;
+
   constructor(public toastController: ToastController, public router: Router, public alertController: AlertController) { }
 
   ngOnInit() {
@@ -52,7 +54,13 @@ export class Tab2ePage implements OnInit {
         }, {
           text: 'Yes',
           handler: async () => {
+            this.saving = true;
+            console.log('Beginning saving process');
             var obj = await this.assembleCachedForm();
+            if(obj == null){
+              this.presentToast('Not all questions have been answered.');
+              return false;
+            }
             if(!this.canLeave){
               return false;
             }
@@ -90,31 +98,31 @@ export class Tab2ePage implements OnInit {
         path: 'tab2Cache.json',
         directory: FilesystemDirectory.Cache
       });
-      console.log('Deleted file', result2);
+      console.log('Deleted file 2', result2);
 
       const result2b = Filesystem.deleteFile({
         path: 'tab2BCache.json',
         directory: FilesystemDirectory.Cache
       });
-      console.log('Deleted file', result2b);
+      console.log('Deleted file 2B', result2b);
 
       const result2c = Filesystem.deleteFile({
         path: 'tab2CCache.json',
         directory: FilesystemDirectory.Cache
       });
-      console.log('Deleted file', result2c);
+      console.log('Deleted file 2C', result2c);
 
       const result2d = Filesystem.deleteFile({
         path: 'tab2DCache.json',
         directory: FilesystemDirectory.Cache
       });
-      console.log('Deleted file', result2d);
+      console.log('Deleted file 2D', result2d);
 
       const result2e = Filesystem.deleteFile({
         path: 'tab2ECache.json',
         directory: FilesystemDirectory.Cache
       });
-      console.log('Deleted file', result2e);
+      console.log('Deleted file 2E', result2e);
     }catch(e){
       this.presentToast('Unable to delete all cached files. Please try again.');
       console.error('Error deleting caches', e);
@@ -163,8 +171,9 @@ export class Tab2ePage implements OnInit {
       });
       var tab2ECache = JSON.parse(contents2e.data);
     }catch(e){
-      this.presentToast('Error loading Cached Data-- How did you even get this error?');
+      //this.presentToast('Error loading Cached Data-- How did you even get this error?');
       console.error('Error loading tab2 Cache', e);
+      return null;
     }
     var thing = {
       regional: tab2Cache.regional,
@@ -194,6 +203,13 @@ export class Tab2ePage implements OnInit {
       issuesChecked: tab2ECache.issuesChecked,
       penaltiesChecked: tab2ECache.penaltiesChecked,
       comments: tab2ECache.comments
+    }
+    for(let item of Object.values(thing)){
+      if(item == null){
+        this.presentToast('Not all items in previous page have been filled in');
+        console.log(item);
+        return null;
+      }
     }
     console.log(thing);
     return thing;
@@ -311,6 +327,7 @@ export class Tab2ePage implements OnInit {
       console.log(obj);
       this.comments = obj.comments;
       this.parseArray(obj);
+      console.log('tab2ECache.json still exists');
     }catch(e){
       this.presentToast('Error loading Cached Data-- entries may not exist');
       console.error('Error loading Cached Data', e);
@@ -389,12 +406,16 @@ export class Tab2ePage implements OnInit {
     toast.present();
   }
 
-  // ionViewWillLeave(){
-  //   this.saveJSON();
-  // }
+  ionViewWillLeave(){
+    if(!this.saving){
+      this.saveJSON();
+    }
+  }
 
   async canDeactivate(){
-    await this.saveJSON();
+    if(!this.saving){
+      await this.saveJSON();
+    }
     return this.canLeave;
   }
 
@@ -422,6 +443,7 @@ export class Tab2ePage implements OnInit {
     this.comments = null;
 
     this.canLeave = null;
+    this.saving = null;
     this.loadJSON();
   }
 
